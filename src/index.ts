@@ -1,5 +1,5 @@
 import { Game } from './game';
-import { Tank } from './tank';
+import { Tank } from './entities/tank';
 
 let g = new Game();
 

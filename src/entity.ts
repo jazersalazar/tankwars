@@ -1,5 +1,5 @@
 import { Sprite } from 'pixi.js';
-import { Utils } from './utils';
+import { Utils } from './helpers/utils';
 
 export class Entity {
     id              : number;

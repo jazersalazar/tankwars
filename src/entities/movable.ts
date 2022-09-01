@@ -1,4 +1,4 @@
-import { Entity } from "./entity";
+import { Entity } from "../entity";
 
 export class Movable extends Entity {
     speed       : number;

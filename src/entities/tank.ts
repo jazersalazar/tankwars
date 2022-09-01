@@ -1,4 +1,4 @@
-import { Config } from "./config";
+import { Config } from "../helpers/config";
 import { Movable } from "./movable";
 
 export class Tank extends Movable {
