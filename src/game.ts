@@ -1,5 +1,7 @@
-import { Application, Container } from 'pixi.js';
+import { Application, Container, Sprite } from 'pixi.js';
 import { Config } from './config';
+import { Entity } from './entity';
+import { Utils } from './utils';
 
 export class Game {
     app         : Application;
@@ -22,5 +24,19 @@ export class Game {
         this.container.sortableChildren = true;
 
         this.field = new Map();
+    }
+
+    addEntity(entity: Entity, cell = 1, row = 1) {
+        entity.setSprite(Sprite.from(entity.currentTexture));
+
+        this.container.addChild(entity.sprite);
+
+        const id = Utils.getRandomNum();
+        entity.id = id;
+
+        entity.setCellPosition(cell, row);
+        this.field.set(id, entity);
+
+        return this.field.get(id);
     }
 }

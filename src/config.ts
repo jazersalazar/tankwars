@@ -1,9 +1,9 @@
 export const Config = {
     game: {
-        backgroundColor: 0x505050,
-        cells: 50,
-        rows: 50,
-        cellSize: 35,
+        backgroundColor : 0x505050,
+        cells           : 50,
+        rows            : 50,
+        cellSize        : 35,
     },
 
     textures: {
@@ -16,20 +16,20 @@ export const Config = {
 
     tanks: {
         red: {
-            damage: 10,
-            bullet: 2,
+            bulletDamage    : 10,
+            bulletCount     : 2,
         },
         green: {
-            damage: 25,
+            bulletDamage    : 25,
             bullet: 1,
         },
         blue: {
-            damage: 20,
-            bullet: 3,
+            bulletDamage    : 20,
+            bulletCount     : 3,
         },
     },
 
     hays: {
-        health: 100,
+        health : 100,
     },
 }
