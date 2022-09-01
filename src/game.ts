@@ -2,6 +2,7 @@ import { Application, Container, Sprite } from 'pixi.js';
 import { Config } from './helpers/config';
 import { Entity } from './entity';
 import { Utils } from './helpers/utils';
+import { Movable } from './entities/movable';
 
 export class Game {
     app         : Application;
@@ -38,5 +39,67 @@ export class Game {
         this.field.set(id, entity);
 
         return this.field.get(id);
+    }
+
+    updateMoves(delta: any) {
+        for (let [, entity] of this.field.entries()) {
+            // Skip entity if it's not moving
+            if (entity.isMoving !== true) continue;
+
+            // Update entity position
+            entity.positionCell = entity.moveToCell;
+
+            if (entity.isMoving) {
+                this.moveEntity(entity, delta);
+            }
+        }
+    }
+
+    moveEntity(entity: Movable, delta: any) {
+        const currentLocation = [entity.sprite.x, entity.sprite.y];
+        const targetLocation = Utils.cellToPos(entity.moveToCell);
+
+        // Prevent entity from moving if it arrived to the target location
+        if (currentLocation[0] === targetLocation[0] &&
+            currentLocation[1] === targetLocation[1]) {
+            entity.isMoving = false;
+            return;
+        }
+
+        const nextLocation = [currentLocation[0], currentLocation[1]];
+
+        switch (entity.direction) {
+            case 'north':
+                nextLocation[1] = currentLocation[1] - (entity.movementSpeed + delta);
+
+                if (nextLocation[1] < targetLocation[1]) {
+                    nextLocation[1] += targetLocation[1] - nextLocation[1];
+                }
+                break;
+            case 'south':
+                nextLocation[1] = currentLocation[1] + (entity.movementSpeed + delta);
+
+                if (nextLocation[1] > targetLocation[1]) {
+                    nextLocation[1] -= nextLocation[1] - targetLocation[1];
+                }
+                break;
+            case 'west':
+                nextLocation[0] = currentLocation[0] - (entity.movementSpeed + delta);
+
+                if (nextLocation[0] < targetLocation[0]) {
+                    nextLocation[0] += targetLocation[0] - nextLocation[0];
+                }
+                break;
+            case 'east':
+                nextLocation[0] = currentLocation[0] + (entity.movementSpeed + delta);
+
+                if (nextLocation[0] > targetLocation[0]) {
+                    nextLocation[0] -= nextLocation[0] - targetLocation[0];
+                }
+                break;
+        }
+
+        entity.sprite.x = nextLocation[0];
+        entity.sprite.y = nextLocation[1];
     }
 }

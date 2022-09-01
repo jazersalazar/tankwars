@@ -1,14 +1,12 @@
 import { Entity } from "../entity";
 
 export class Movable extends Entity {
-    speed       : number;
     isMoving    : boolean;
     moveToCell  : number[];
 
     constructor() {
         super();
         
-        this.speed = 1;
         this.isMoving = false;
         this.moveToCell = [];
     }

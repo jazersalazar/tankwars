@@ -11,6 +11,7 @@ export class Entity {
     health          : number;
     textures!       : any;
     currentTexture  : any;
+    movementSpeed           : number;
 
     constructor(id: number = 0) {
         // Enity unique id
@@ -20,12 +21,13 @@ export class Entity {
 
         // position & direction
         this.positionCell = [1, 1];
-        this.direction = "North";
+        this.direction = 'north';
 
         // status
-        this.isDamagable = true;
+        this.isDamagable = false;
         this.isDestroyed = false;
         this.health = 1;
+        this.movementSpeed = 10;
     }
 
     setTextures(normalTexture: string, destroyedTexture: string) {
@@ -51,17 +53,17 @@ export class Entity {
     setDirection(direction: string) {
         this.direction = direction;
         switch (direction) {
-            case 'east':
-                this.sprite.angle = 90;
+            case 'north':
+                this.sprite.angle = 0;
                 break;
             case 'west':
                 this.sprite.angle = 270;
                 break;
-            case 'north':
-                this.sprite.angle = 0;
-                break;
             case 'south':
                 this.sprite.angle = 180;
+                break;
+            case 'east':
+                this.sprite.angle = 90;
                 break;
         }
     }
