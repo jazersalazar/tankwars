@@ -6,12 +6,12 @@ export class Entity {
     sprite          : Sprite;
     positionCell    : number[];
     direction       : string;
-    isDamagable     : boolean;
+    isDamageable     : boolean;
     isDestroyed     : boolean;
     health          : number;
     textures!       : any;
     currentTexture  : any;
-    movementSpeed           : number;
+    movementSpeed   : number;
 
     constructor(id: number = 0) {
         // Enity unique id
@@ -24,7 +24,7 @@ export class Entity {
         this.direction = 'north';
 
         // status
-        this.isDamagable = false;
+        this.isDamageable = true;
         this.isDestroyed = false;
         this.health = 1;
         this.movementSpeed = 10;

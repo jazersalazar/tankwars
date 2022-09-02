@@ -7,3 +7,9 @@ A basic tank shooter game built with Pixi JS using TypeScript.
 - [Pixi Hotwire (Boilerplate)](https://github.com/miltoncandelero/pixi-hotwire)
 - [Webpack](https://webpack.js.org/)
 - [NPM](https://www.npmjs.com/)
+
+## Reference
+- [PXTanks](https://github.com/ahmedkabd/pxtanks)
+
+## Assets
+- [Topdown Tanks Redux](https://kenney.nl/assets/topdown-tanks-redux)

@@ -41,20 +41,6 @@ export class Game {
         return this.field.get(id);
     }
 
-    updateMoves(delta: any) {
-        for (let [, entity] of this.field.entries()) {
-            // Skip entity if it's not moving
-            if (entity.isMoving !== true) continue;
-
-            // Update entity position
-            entity.positionCell = entity.moveToCell;
-
-            if (entity.isMoving) {
-                this.moveEntity(entity, delta);
-            }
-        }
-    }
-
     moveEntity(entity: Movable, delta: any) {
         const currentLocation = [entity.sprite.x, entity.sprite.y];
         const targetLocation = Utils.cellToPos(entity.moveToCell);
@@ -62,6 +48,7 @@ export class Game {
         // Prevent entity from moving if it arrived to the target location
         if (currentLocation[0] === targetLocation[0] &&
             currentLocation[1] === targetLocation[1]) {
+
             entity.isMoving = false;
             return;
         }
@@ -101,5 +88,54 @@ export class Game {
 
         entity.sprite.x = nextLocation[0];
         entity.sprite.y = nextLocation[1];
+    }
+
+    detectCollision(entity: Movable) {
+        for (let [, otherEntity] of this.field.entries()) {
+            // Skip detection from self
+            if (entity.id === otherEntity) {
+                continue;
+            }
+
+            console.log(otherEntity);
+            // Skip collision with non-damageable
+            if (otherEntity.isDamageable === false ||
+                otherEntity.isDestroyed) {
+
+                continue;
+            }
+
+            // Detect game borders
+            if (entity.moveToCell[0] < 1 ||
+                entity.moveToCell[0] > Config.game.cells ||
+                entity.moveToCell[1] < 1 ||
+                entity.moveToCell[1] > Config.game.rows) {
+
+                return true
+            }
+        }
+
+        return false;
+    }
+
+    updateMoves(delta: any) {
+        for (let [, entity] of this.field.entries()) {
+            // Skip entity if it's not moving
+            if (entity.isMoving !== true) continue;
+
+            // Check collision
+            if (this.detectCollision(entity)) {
+                console.log('collision detected');
+                entity.isMoving = false;
+                entity.moveToCell = entity.positionCell;
+            } else {
+                console.log('collision not detected');
+                entity.positionCell = entity.moveToCell;
+            }
+
+            if (entity.isMoving) {
+                this.moveEntity(entity, delta);
+            }
+        }
     }
 }
