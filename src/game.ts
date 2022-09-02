@@ -1,8 +1,8 @@
 import { Application, Container, Sprite } from 'pixi.js';
 import { Config } from './helpers/config';
 import { Entity } from './entity';
-import { Utils } from './helpers/utils';
 import { Movable } from './entities/movable';
+import { Utils } from './helpers/utils';
 
 export class Game {
     app         : Application;

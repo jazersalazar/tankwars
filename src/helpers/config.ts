@@ -6,26 +6,21 @@ export const Config = {
         cellSize        : 35,
     },
 
-    textures: {
-        tanks: {
-            red     : 'tank_red.png',
-            green   : 'tank_green.png',
-            blue    : 'tank_blue.png',
-        },
-    },
-
     tanks: {
         red: {
             bulletDamage    : 10,
             bulletCount     : 2,
+            texture         : 'tank_red.png',
         },
         green: {
             bulletDamage    : 25,
-            bullet: 1,
+            bulletCount     : 1,
+            texture         : 'tank_green.png',
         },
         blue: {
             bulletDamage    : 20,
             bulletCount     : 3,
+            texture         : 'tank_blue.png',
         },
     },
 

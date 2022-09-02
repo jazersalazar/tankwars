@@ -8,6 +8,7 @@ const player = g.addEntity(new Tank(), 1, 1);
 
 // Player Controller
 window.addEventListener('keypress', function (e) {
+    // Movement
     switch (e.key) {
         case 'w':
             player.move('north');
@@ -21,6 +22,11 @@ window.addEventListener('keypress', function (e) {
         case 'd':
             player.move('east');
             break;
+    }
+
+    // Transform
+    if (e.key == 't') {
+        player.changeColor();
     }
 });
 
