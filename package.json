@@ -7,7 +7,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "pixi.js": "^6.3.0"
+    "pixi-viewport": "^4.35.0",
+    "pixi.js": "^6.5.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^10.2.4",

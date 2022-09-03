@@ -1,36 +1,40 @@
 import { Game } from './game';
-import { Tank } from './entities/tank';
 
 const g = new Game();
-
-// Add player
-const player = g.addEntity(new Tank(), 1, 1);
 
 // Player Controller
 window.addEventListener('keypress', function (e) {
     // Movement
     switch (e.key) {
         case 'w':
-            player.move('north');
+            g.player.move('north');
             break;
         case 'a':
-            player.move('west');
+            g.player.move('west');
             break;
         case 's':
-            player.move('south');
+            g.player.move('south');
             break;
         case 'd':
-            player.move('east');
+            g.player.move('east');
             break;
     }
 
     // Transform
     if (e.key == 't') {
-        player.changeColor();
+        g.player.changeColor();
     }
 });
 
-g.app.ticker.add((delta) => {
-    // Player Movements
+g.camera.ticker.add((delta) => {
     g.updateMoves(delta);
+
+    if (!g.player.isMoving) {
+        g.camera.renderer.render(g.camera.viewport);
+    }
 });
+
+window.onresize = () => {
+    g.camera.renderer.resize(window.innerWidth, window.innerHeight)
+    g.camera.viewport.resize(window.innerWidth, window.innerHeight)
+}

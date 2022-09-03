@@ -1,41 +1,34 @@
-import { Application, Container, Sprite } from 'pixi.js';
+import { Sprite } from 'pixi.js';
 import { Config } from './helpers/config';
 import { Entity } from './entity';
 import { Movable } from './entities/movable';
 import { Utils } from './helpers/utils';
+import { Camera } from './camera';
+import { Tank } from './entities/tank';
 
 export class Game {
-    app         : Application;
-    container   : Container;
     field       : Map<number, any>;
-
+    camera      : Camera;
+    player      : any;
     constructor() {
-        this.app = new Application({
-            view            : document.getElementById('pixi-canvas') as HTMLCanvasElement,
-            width           : Config.game.cells * Config.game.cellSize,
-            height          : Config.game.rows * Config.game.cellSize,
-            backgroundColor : Config.game.backgroundColor,
-            resolution      : window.devicePixelRatio || 1,
-        });
-
-        this.container = new Container;
-        this.app.stage.addChild(this.container);
-        
-        // enable zIndex
-        this.container.sortableChildren = true;
-
         this.field = new Map();
+        // Create and follow player
+        this.player = this.addEntity(new Tank(), 1, 1, false);
+        this.camera = new Camera(this.player);
     }
 
-    addEntity(entity: Entity, cell = 1, row = 1) {
+    public addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
         entity.setSprite(Sprite.from(entity.currentTexture));
 
-        this.container.addChild(entity.sprite);
+        if (addtoCamera) {
+            this.camera.viewport.addChild(entity.sprite);
+        }
 
         const id = Utils.getRandomNum();
         entity.id = id;
 
         entity.setCellPosition(cell, row);
+
         this.field.set(id, entity);
 
         return this.field.get(id);
@@ -106,7 +99,7 @@ export class Game {
 
             // Detect game borders
             if (entity.moveToCell[0] < 1 ||
-                entity.moveToCell[0] > Config.game.cells ||
+                entity.moveToCell[0] > Config.game.columns ||
                 entity.moveToCell[1] < 1 ||
                 entity.moveToCell[1] > Config.game.rows) {
 
