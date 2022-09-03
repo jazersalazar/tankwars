@@ -97,7 +97,6 @@ export class Game {
                 continue;
             }
 
-            console.log(otherEntity);
             // Skip collision with non-damageable
             if (otherEntity.isDamageable === false ||
                 otherEntity.isDestroyed) {
@@ -125,11 +124,9 @@ export class Game {
 
             // Check collision
             if (this.detectCollision(entity)) {
-                console.log('collision detected');
                 entity.isMoving = false;
                 entity.moveToCell = entity.positionCell;
             } else {
-                console.log('collision not detected');
                 entity.positionCell = entity.moveToCell;
             }
 

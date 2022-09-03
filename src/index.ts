@@ -31,6 +31,6 @@ window.addEventListener('keypress', function (e) {
 });
 
 g.app.ticker.add((delta) => {
-    // Player Movments
+    // Player Movements
     g.updateMoves(delta);
 });
