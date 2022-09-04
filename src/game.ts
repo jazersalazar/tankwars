@@ -6,6 +6,7 @@ import { Utils } from './helpers/utils';
 import { Camera } from './camera';
 import { Tank } from './entities/tank';
 import { Wall } from './entities/wall';
+import { Haystack } from './entities/haystack';
 
 export class Game {
     field       : Map<number, any>;
@@ -21,6 +22,8 @@ export class Game {
         this.addEntity(new Wall(), 3, 2);
         this.addEntity(new Wall(), 4, 1);
         this.addEntity(new Wall(), 4, 2);
+
+        this.addEntity(new Haystack(), 5, 5);
     }
 
     public addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
