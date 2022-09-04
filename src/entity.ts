@@ -77,6 +77,10 @@ export class Entity {
             this.sprite.zIndex = -1;
 
             this.sprite.texture = Texture.from(this.currentTexture);
+
+            setTimeout(() => {
+                this.sprite.parent.removeChild(this.sprite);
+            }, 1000);
         }
     }
 }
