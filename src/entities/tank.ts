@@ -24,6 +24,7 @@ export class Tank extends Movable {
         this.bulletSpeed = Config.bullets.speed;
         this.shootingRate = Config.bullets.shootingRate;
         this.isFiring = false;
+        this.isDamageable = true;
     }
 
     changeColor() {

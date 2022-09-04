@@ -22,7 +22,9 @@ export class Bullet extends Movable {
         // destroy on collission
         this.sprite.destroy();
 
-        // damage entity
-        hitEntity.takeDamage(this.damage);
+        // damage entity if possible
+        if (hitEntity.isDamageable) {
+            hitEntity.takeDamage(this.damage);
+        }
     }
 }

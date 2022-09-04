@@ -6,5 +6,6 @@ export class Wall extends Unmovable {
         super();
 
         this.setTextures(Config.walls.texture, '');
+        this.isDamageable = false;
     }
 }

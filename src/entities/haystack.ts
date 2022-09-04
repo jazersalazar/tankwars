@@ -7,6 +7,5 @@ export class Haystack extends Unmovable {
 
         this.setTextures(Config.hays.texture.normal, Config.hays.texture.destroyed);
         this.health = Config.hays.health;
-        this.isDamageable = true;
     }
 }

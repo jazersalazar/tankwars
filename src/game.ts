@@ -107,8 +107,7 @@ export class Game {
             }
 
            // Skip collision with non-damageable
-            if (otherEntity.isDamageable === false ||
-                otherEntity.isDestroyed) {
+            if (otherEntity.isDestroyed) {
 
                 continue;
             }
