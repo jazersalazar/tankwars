@@ -1,10 +1,11 @@
 import { Sprite } from 'pixi.js';
 import { Config } from './helpers/config';
 import { Entity } from './entity';
-import { Movable } from './entities/movable';
+import { Movable } from './entities/mobility';
 import { Utils } from './helpers/utils';
 import { Camera } from './camera';
 import { Tank } from './entities/tank';
+import { Wall } from './entities/wall';
 
 export class Game {
     field       : Map<number, any>;
@@ -15,6 +16,11 @@ export class Game {
         // Create and follow player
         this.player = this.addEntity(new Tank(), 1, 1, false);
         this.camera = new Camera(this.player);
+
+        this.addEntity(new Wall(), 3, 1);
+        this.addEntity(new Wall(), 3, 2);
+        this.addEntity(new Wall(), 4, 1);
+        this.addEntity(new Wall(), 4, 2);
     }
 
     public addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
@@ -86,15 +92,22 @@ export class Game {
     detectCollision(entity: Movable) {
         for (let [, otherEntity] of this.field.entries()) {
             // Skip detection from self
-            if (entity.id === otherEntity) {
+            if (entity.id === otherEntity.id) {
                 continue;
             }
 
-            // Skip collision with non-damageable
-            if (otherEntity.isDamageable === false ||
-                otherEntity.isDestroyed) {
+           // Skip collision with non-damageable
+            if (otherEntity.isDestroyed) {
 
                 continue;
+            }
+
+            // Check if collided with other entity
+            switch (JSON.stringify(entity.moveToCell)) {
+                case JSON.stringify(otherEntity.positionCell):
+                case JSON.stringify(otherEntity.moveToCell):
+
+                return true;
             }
 
             // Detect game borders

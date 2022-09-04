@@ -24,6 +24,11 @@ export const Config = {
     },
 
     hays: {
-        health : 100,
+        health  : 100,
+        texture : 'haystack.png', 
     },
+
+    walls: {
+        texture : 'wall.png',
+    }
 }

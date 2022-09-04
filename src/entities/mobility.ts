@@ -41,3 +41,9 @@ export class Movable extends Entity {
         this.setDirection(direction);
     }
 }
+
+export class Unmovable extends Entity {
+    constructor() {
+        super();
+    }
+}

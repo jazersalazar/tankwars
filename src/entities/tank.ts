@@ -1,6 +1,6 @@
 import { Texture } from "pixi.js";
 import { Config } from "../helpers/config";
-import { Movable } from "./movable";
+import { Movable } from "./mobility";
 
 export class Tank extends Movable {
     tankColor       : keyof typeof Config.tanks;

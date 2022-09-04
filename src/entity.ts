@@ -6,7 +6,7 @@ export class Entity {
     sprite          : Sprite;
     positionCell    : number[];
     direction       : string;
-    isDamageable     : boolean;
+    isDamageable    : boolean;
     isDestroyed     : boolean;
     health          : number;
     textures!       : any;
