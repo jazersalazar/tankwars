@@ -1,4 +1,4 @@
-import { Sprite } from 'pixi.js';
+import { Sprite, Texture } from 'pixi.js';
 import { Utils } from './helpers/utils';
 
 export class Entity {
@@ -65,6 +65,18 @@ export class Entity {
             case 'east':
                 this.sprite.angle = 90;
                 break;
+        }
+    }
+
+    takeDamage(damage: number) {
+        this.health -= damage;
+
+        if (this.health <= 0) {
+            this.isDestroyed = true;
+            this.currentTexture = this.textures.destroyed;
+            this.sprite.zIndex = -1;
+
+            this.sprite.texture = Texture.from(this.currentTexture);
         }
     }
 }

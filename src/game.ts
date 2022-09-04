@@ -7,23 +7,26 @@ import { Camera } from './camera';
 import { Tank } from './entities/tank';
 import { Wall } from './entities/wall';
 import { Haystack } from './entities/haystack';
+import { Bullet } from './entities/bullet';
 
 export class Game {
     field       : Map<number, any>;
     camera      : Camera;
     player      : any;
+
     constructor() {
         this.field = new Map();
         // Create and follow player
         this.player = this.addEntity(new Tank(), 1, 1, false);
         this.camera = new Camera(this.player);
 
-        this.addEntity(new Wall(), 3, 1);
         this.addEntity(new Wall(), 3, 2);
         this.addEntity(new Wall(), 4, 1);
         this.addEntity(new Wall(), 4, 2);
 
         this.addEntity(new Haystack(), 5, 5);
+        this.addEntity(new Haystack(), 5, 6);
+        this.addEntity(new Haystack(), 5, 7);
     }
 
     public addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
@@ -52,6 +55,10 @@ export class Game {
             currentLocation[1] === targetLocation[1]) {
 
             entity.isMoving = false;
+            if (entity instanceof Bullet) {
+                entity.move(entity.direction);
+            }
+
             return;
         }
 
@@ -100,7 +107,8 @@ export class Game {
             }
 
            // Skip collision with non-damageable
-            if (otherEntity.isDestroyed) {
+            if (otherEntity.isDamageable === false ||
+                otherEntity.isDestroyed) {
 
                 continue;
             }
@@ -109,6 +117,11 @@ export class Game {
             switch (JSON.stringify(entity.moveToCell)) {
                 case JSON.stringify(otherEntity.positionCell):
                 case JSON.stringify(otherEntity.moveToCell):
+
+                if (entity instanceof Bullet) {
+                    entity.hasHit(otherEntity);
+                    this.field.delete(entity.id);
+                }
 
                 return true;
             }
@@ -119,7 +132,12 @@ export class Game {
                 entity.moveToCell[1] < 1 ||
                 entity.moveToCell[1] > Config.game.rows) {
 
-                return true
+                if (entity instanceof Bullet) {
+                    entity.hasHitBorder();
+                    this.field.delete(entity.id);
+                }
+
+                return true;
             }
         }
 

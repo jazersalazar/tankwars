@@ -23,12 +23,21 @@ export const Config = {
         },
     },
 
+    bullets: {
+        texture         : 'bullet.png',
+        speed           : 30,
+        shootingRate    : 1,
+    },
+
     hays: {
         health  : 100,
-        texture : 'haystack.png', 
+        texture: {
+            normal      : 'haystack.png',
+            destroyed   : 'haystack_destroyed.png',
+        },
     },
 
     walls: {
         texture : 'wall.png',
-    }
+    },
 }

@@ -24,6 +24,11 @@ window.addEventListener('keypress', function (e) {
     if (e.key == 't') {
         g.player.changeColor();
     }
+
+    // Shoot
+    if (e.key == ' ') {
+        g.player.shoot(g);
+    }
 });
 
 g.camera.ticker.add((delta) => {

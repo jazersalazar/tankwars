@@ -18,4 +18,8 @@ export class Utils {
             Math.floor((xy[1] + Config.game.cellSize / 2) / Config.game.cellSize),
         ]
     }
+
+    static sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
