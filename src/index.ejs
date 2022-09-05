@@ -15,6 +15,19 @@
 			top: 0;
 			left: 0;
 			background: rgba(0, 0, 0, 0.1);
+			z-index: 0;
+		}
+
+		#controls {
+			background: rgba(0, 0, 0, 0.4);
+			width: 180px;
+			padding: 20px;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 800;
+			font-family: system-ui;
+			z-index: 10;
+			position: absolute;
 		}
 	</style>
 
@@ -23,6 +36,10 @@
 <body>
 	<noscript>Please enable JavaScript in your web browser to view this page.</noscript>
 	<div id="pixi-content"><canvas id="pixi-canvas" /></div>
+	<div id="controls">
+		Navigation - WASD<br/>
+		Fire - Spacebar
+	</div>
 </body>
 
 </html>
