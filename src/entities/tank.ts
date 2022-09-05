@@ -58,7 +58,6 @@ export class Tank extends Movable {
             tank.isFiring = false
         }, 100 * (10 - this.shootingRate));
 
-        // Fire bullets until there's no more remaining
         this.fireBullet(game, this.bulletCount);
     }
 
@@ -73,6 +72,7 @@ export class Tank extends Movable {
 
         remainingBullets--;
 
+        // Fire bullets until there's no more remaining
         if (remainingBullets > 0) {
             Utils.sleep(100).then(() => {
                 this.fireBullet(game, remainingBullets);

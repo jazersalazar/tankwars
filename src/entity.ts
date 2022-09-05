@@ -74,7 +74,6 @@ export class Entity {
         if (this.health <= 0) {
             this.isDestroyed = true;
             this.currentTexture = this.textures.destroyed;
-            this.sprite.zIndex = -1;
 
             this.sprite.texture = Texture.from(this.currentTexture);
 

@@ -26,18 +26,20 @@ export const Config = {
     bullets: {
         texture         : 'bullet.png',
         speed           : 30,
-        shootingRate    : 1,
+        shootingRate    : 5,
     },
 
     hays: {
-        health  : 100,
-        texture: {
+        health      : 100,
+        spawnCount  : 25,
+        texture     : {
             normal      : 'haystack.png',
             destroyed   : 'haystack_destroyed.png',
         },
     },
 
     walls: {
-        texture : 'wall.png',
+        texture    : 'wall.png',
+        spawnCount : 50,
     },
 }

@@ -13,23 +13,42 @@ export class Game {
     field       : Map<number, any>;
     camera      : Camera;
     player      : any;
+    spawnMap   : any;
 
     constructor() {
         this.field = new Map();
         // Create and follow player
         this.player = this.addEntity(new Tank(), 1, 1, false);
+        this.player.sprite.zIndex = 1;
         this.camera = new Camera(this.player);
 
-        this.addEntity(new Wall(), 3, 2);
-        this.addEntity(new Wall(), 4, 1);
-        this.addEntity(new Wall(), 4, 2);
-
-        this.addEntity(new Haystack(), 5, 5);
-        this.addEntity(new Haystack(), 5, 6);
-        this.addEntity(new Haystack(), 5, 7);
+        // Intialize temp map with palyer position
+        this.spawnMap = ['1,1'];
+        this.spawnEntities(Wall, Config.walls.spawnCount);
+        this.spawnEntities(Haystack, Config.hays.spawnCount);
     }
 
-    public addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
+    spawnEntities(entity: any, remainingEntities: number) {
+        const x = Math.floor(Math.random() * Config.game.columns) + 1;
+        const y = Math.floor(Math.random() * Config.game.rows) + 1;
+        const coords = x + ',' + y;
+
+        // Only spawn if it's a unique spot
+        if (!this.spawnMap.includes(coords)) {
+            this.addEntity(new entity, x, y);
+            this.spawnMap.push(coords);
+            remainingEntities--;
+        }
+
+        // Spawn until there's no more remaining to spawn
+        if (remainingEntities > 0) {
+            this.spawnEntities(entity, remainingEntities);
+        } else {
+            return;
+        }
+    }
+
+    addEntity(entity: Entity, cell = 1, row = 1, addtoCamera = true) {
         entity.setSprite(Sprite.from(entity.currentTexture));
 
         if (addtoCamera) {
@@ -40,6 +59,7 @@ export class Game {
         entity.id = id;
 
         entity.setCellPosition(cell, row);
+        entity.sprite.zIndex = -2;
 
         this.field.set(id, entity);
 
@@ -108,7 +128,6 @@ export class Game {
 
            // Skip collision with non-damageable
             if (otherEntity.isDestroyed) {
-
                 continue;
             }
 

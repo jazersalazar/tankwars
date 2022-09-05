@@ -40,7 +40,7 @@ export class Camera {
 
     border() {
         const line = this.viewport.addChild(new Graphics())
-        line.lineStyle(10, 0xff0000).drawRect(0, 0, this.viewport.worldWidth, this.viewport.worldHeight)
+        line.lineStyle(10, 0x444444).drawRect(0, 0, this.viewport.worldWidth, this.viewport.worldHeight)
         line.zIndex = -1;
     }
 }
