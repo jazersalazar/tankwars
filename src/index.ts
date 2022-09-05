@@ -4,8 +4,9 @@ const g = new Game();
 
 // Player Controller
 window.addEventListener('keypress', function (e) {
+    const key = e.key.toLowerCase();
     // Movement
-    switch (e.key) {
+    switch (key) {
         case 'w':
             g.player.move('north');
             break;
@@ -21,12 +22,12 @@ window.addEventListener('keypress', function (e) {
     }
 
     // Transform
-    if (e.key == 't') {
+    if (key == 't') {
         g.player.changeColor();
     }
 
     // Shoot
-    if (e.key == ' ') {
+    if (key == ' ') {
         g.player.shoot(g);
     }
 });

@@ -20,14 +20,23 @@
 
 		#controls {
 			background: rgba(0, 0, 0, 0.4);
-			width: 180px;
 			padding: 20px;
-			color: #fff;
-			font-size: 18px;
-			font-weight: 800;
-			font-family: system-ui;
 			z-index: 10;
 			position: absolute;
+			caret-color: transparent;
+		}
+
+		table th {
+			text-align: left;
+			font-weight: 800;
+		}
+	
+		table th,
+		table td {
+			color: #ffffff;
+			font-size: 18px;
+			font-family: system-ui;
+			padding: 2px 13px;
 		}
 	</style>
 
@@ -37,8 +46,26 @@
 	<noscript>Please enable JavaScript in your web browser to view this page.</noscript>
 	<div id="pixi-content"><canvas id="pixi-canvas" /></div>
 	<div id="controls">
-		Navigation - WASD<br/>
-		Fire - Spacebar
+		<table>
+			<thead>
+				<th>Controls</th>
+				<th>Key</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Navigation</td>
+					<td>W A S D</td>
+				</tr>
+				<tr>
+					<td>Fire</td>
+					<td>Spacebar</td>
+				</tr>
+				<tr>
+					<td>Transform</td>
+					<td>T</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 
