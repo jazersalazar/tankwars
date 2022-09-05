@@ -13,3 +13,6 @@ A basic tank shooter game built with Pixi JS using TypeScript.
 
 ## Assets
 - [Topdown Tanks Redux](https://kenney.nl/assets/topdown-tanks-redux)
+
+## Live Demo
+- [Tank Wars Live](https://o690.com/tankwars/)

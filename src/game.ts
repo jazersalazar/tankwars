@@ -17,13 +17,20 @@ export class Game {
 
     constructor() {
         this.field = new Map();
+
+        // Generate random starting position
+        const x = Math.floor(Math.random() * Config.game.columns) + 1;
+        const y = Math.floor(Math.random() * Config.game.rows) + 1;
+
         // Create and follow player
-        this.player = this.addEntity(new Tank(), 1, 1, false);
+        this.player = this.addEntity(new Tank(), x, y, false);
         this.player.sprite.zIndex = 1;
+        this.player.setDirection('south');
+
         this.camera = new Camera(this.player);
 
-        // Intialize temp map with palyer position
-        this.spawnMap = ['1,1'];
+        // Intialize spawn map with palyer position
+        this.spawnMap = [x + ',' + y];
         this.spawnEntities(Wall, Config.walls.spawnCount);
         this.spawnEntities(Haystack, Config.hays.spawnCount);
     }
