@@ -13,7 +13,7 @@ export class Game {
     field       : Map<number, any>;
     camera      : Camera;
     player      : any;
-    spawnMap   : any;
+    spawnMap    : any;
 
     constructor() {
         this.field = new Map();
